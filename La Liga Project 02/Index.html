@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Liga Clubs</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the table and text */
+        body {
+            font-family: "Inter", sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #333; /* Default text color */
+        }
+        table {
+            width: 90%;
+            max-width: 900px;
+            border-collapse: separate; /* Use separate for rounded corners on cells */
+            border-spacing: 0;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px; /* Rounded corners for the table */
+            overflow: hidden; /* Ensures content respects border-radius */
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #F87171; /* Header background changed to light red */
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+        /* Rounded corners for first and last cells in header and body */
+        th:first-child { border-top-left-radius: 12px; }
+        th:last-child { border-top-right-radius: 12px; }
+        tr:last-child td:first-child { border-bottom-left-radius: 12px; }
+        tr:last-child td:last-child { border-bottom-right-radius: 12px; }
+        td {
+            background-color: white; /* Ensure cell background is white */
+        }
+        /* Style for the first column (Club Name) */
+        table tbody tr td:first-child {
+            transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition for color and background */
+            cursor: pointer; /* Indicate it's interactive */
+        }
+        /* Hover effect for the first column */
+        table tbody tr td:first-child:hover {
+            color: red; /* Change text color to red on hover */
+        }
+        /* Clicked state for the first column */
+        .club-clicked {
+            background-color: #F87171 !important; /* Light red background when clicked */
+            color: white !important; /* White text when clicked */
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 900px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .link-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 900px;
+            text-align: center;
+        }
+        .link-section a {
+            /* Background color for links changed to light red */
+            background-color: #F87171;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin: 0 15px;
+            padding: 10px 20px;
+        }
+        .link-section a:hover {
+            background-color: #EF4444; /* Darker light red on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-3xl font-bold mb-4">La Liga Clubs and Their Features</h1>
+        <p class="text-lg mb-6">Explore some of the top clubs in Spanish football.</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Club</th>
+                <th>City</th>
+                <th>Stadium</th>
+                <th>Manager</th>
+                <th>Key Player</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Real Madrid</td>
+                <td>Madrid</td>
+                <td>Santiago Bernabéu</td>
+                <td>Carlo Ancelotti</td>
+                <td>Jude Bellingham</td>
+            </tr>
+            <tr>
+                <td>FC Barcelona</td>
+                <td>Barcelona</td>
+                <td>Spotify Camp Nou</td>
+                <td>Hansi Flick</td>
+                <td>Robert Lewandowski</td>
+            </tr>
+            <tr>
+                <td>Atlético Madrid</td>
+                <td>Madrid</td>
+                <td>Cívitas Metropolitano</td>
+                <td>Diego Simeone</td>
+                <td>Antoine Griezmann</td>
+            </tr>
+            <tr>
+                <td>Sevilla FC</td>
+                <td>Seville</td>
+                <td>Ramón Sánchez Pizjuán</td>
+                <td>García Pimienta</td>
+                <td>Lucas Ocampos</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="link-section">
+        <h2 class="text-2xl font-semibold mb-4">Navigation & External Links</h2>
+        <!-- Link to the extra page -->
+        <a href="about.html" class="text-white bg-red-400 hover:bg-red-500 px-4 py-2 rounded-md">
+            Learn More About La Liga
+        </a>
+        <!-- Link to YouTube -->
+        <a href="https://www.youtube.com/@LaLiga" target="_blank" class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md">
+            Visit YouTube
+        </a>
+    </div>
+
+    <script>
+        // Get all table cells in the first column of the tbody
+        const clubCells = document.querySelectorAll('table tbody tr td:first-child');
+
+        // Loop through each cell and add a click event listener
+        clubCells.forEach(cell => {
+            cell.addEventListener('click', function() {
+                // Remove 'club-clicked' class from any previously clicked cells
+                clubCells.forEach(otherCell => {
+                    if (otherCell !== this) { // Don't remove if it's the current cell
+                        otherCell.classList.remove('club-clicked');
+                        // Reset to default white background and text color if it was clicked
+                        otherCell.style.backgroundColor = 'white';
+                        otherCell.style.color = '#333'; // Reset to default text color
+                    }
+                });
+
+                // Toggle the 'club-clicked' class on the current cell
+                this.classList.toggle('club-clicked');
+
+                // If the class is added, ensure text is white. If removed, reset to default.
+                if (this.classList.contains('club-clicked')) {
+                    this.style.color = 'white';
+                } else {
+                    this.style.color = '#333'; // Reset to default text color
+                }
+            });
+        });
+    </script>
+</body>
+</html>
